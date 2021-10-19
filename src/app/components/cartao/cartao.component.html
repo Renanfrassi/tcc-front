@@ -1,0 +1,21 @@
+<div class="table-responsive">
+    <table class="table table-bordered table-sm" id="dataTable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descrição</th>
+                <th class="text-center">
+                    <button (click)="abrirModalCartao()" class="btn btn-sm btn-success">
+                        <em class="fa fa-plus"></em>
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let lista of listaCartao">
+                <td>{{ lista.id }}</td>
+                <td>{{ lista.nome }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
