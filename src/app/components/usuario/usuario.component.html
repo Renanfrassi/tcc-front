@@ -1,0 +1,43 @@
+<div class="container-fluid">
+
+    <h1 class="h3 mb-2 text-gray-800">Usuários</h1>
+
+    <div class="card shadow mb-4 content-body">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Id</th>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">Cartões</th>
+                            <th colspan="2" class="text-center">
+                                <button class="btn btn-sm btn-success" (click)="abrirModalUsuario()">
+                                    <em class="fa-fw fa fa-plus"></em>
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let lista of listaUsuario">
+                            <td class="text-center">{{ lista.id }}</td>
+                            <td class="text-center">{{ lista.nome }}</td>
+                            <td><select class="form-control">
+                                    <option value="teste">AA</option>
+                                </select> </td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-info" (click)="abrirModalUsuario()">
+                                    <i class="fa-fw fas fa-search"></i>
+                                </button>
+                                <button class="btn btn-sm btn-success ml-2" (click)="abrirModalUsuario()">
+                                    <em class="fa-fw fa fa-plus"></em>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

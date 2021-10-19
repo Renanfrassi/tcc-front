@@ -1,0 +1,31 @@
+<div class="container-fluid">
+
+    <h1 class="h3 mb-2 text-gray-800">Fechaduras</h1>
+
+    <div class="card shadow mb-4 content-body">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th >Id</th>
+                            <th>Nome Fechadura</th>
+                            <th class="text-center">
+                                <button (click)="abrirModalFechadura()" class="btn btn-sm btn-success">
+                                    <em class="fa fa-plus"></em>
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let lista of listaFechadura">
+                            <td>{{ lista.id }}</td>
+                            <td>{{ lista.descricao }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

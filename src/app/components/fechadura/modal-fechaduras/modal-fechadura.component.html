@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Cadastro Fechadura</h4>
+
+  <button type="button" class="close ml-2" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <form #formFechaduras="ngForm">
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label>Nome</label>
+        <input type="text" [(ngModel)]="fechadura.id" class="form-control" name="id" #id="ngModel">
+      </div>
+      <div class="form-group col-6">
+        <label>Descrição</label>
+        <input [(ngModel)]="fechadura.descricao" type="password" class="form-control" name="descricao" #descricao="ngModel">
+      </div>
+    </div>
+    <button (click)="postFechadura()" class="btn btn-primary" [disabled]="formFechaduras.invalid">Sign in</button>
+  </form>
+</div>
+
+<div class="modal-footer pb-0">
+
+</div>
