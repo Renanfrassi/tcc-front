@@ -7,18 +7,63 @@
 </div>
 
 <div class="modal-body">
-  <form #formCartao="ngForm">
+  <form [formGroup]="cartaoForm">
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-12">
         <label>Código</label>
-        <input [(ngModel)]="cartao.id" type="text" class="form-control" #id="ngModel" name="id">
+        <input type="text" class="form-control" formControlName="idCartao">
       </div>
-      <div class="form-group col-md-6">
-        <label>Descrição</label>
-        <input [(ngModel)]="cartao.nome" type="text" class="form-control" #nome="ngModel" name="nome">
+      <div class="form-group col-6">
+        <label for="inputState">Data de Início</label>
+        <input type="date" class="form-control" formControlName="dataInicio">
+      </div>
+      <div class="form-group col-6">
+        <label for="inputState">Data de Fim</label>
+        <input type="date" class="form-control" formControlName="dataFim">
+      </div>
+      <div class="form-group col-12">
+        <label for="inputState">Salas</label>
+        <select class="form-control" id="idFechadura" formControlName="idFechadura">
+          <option *ngFor="let fechadura of fechaduras" [value]="fechadura.id">{{ fechadura.descricao }}</option>
+        </select>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm" id="dataTable">
+          <thead>
+            <tr>
+              <th class="text-center">Dias</th>
+              <th class="text-center">Hora início</th>
+              <th class="text-center">Hora término</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dia of listaSemanal">
+              <td>
+                <div class="form-check">
+                  <input class="form-check-input" (change)="addSlot($event)" type="checkbox" [value]="dia.diaSemana" id="invalidCheck2">
+                  <label class="form-check-label" for="invalidCheck2">
+                    {{ dia.nomeDia }}
+                  </label>
+                </div>
+              </td>
+              <td (change)="changeHoraInicoSlot(dia.diaSemana, $event)" class="text-center"> <select  class="form-control" id="hourSelect">
+                  <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+                </select>
+              </td>
+              <td (change)="changeHoraFimSlot(dia.diaSemana, $event)"  class="text-center"> <select class="form-control" id="hourSelect">
+                  <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <button (click)="addCartaoUsuario()" type="submit" class="btn btn-primary" [disabled]="formCartao.invalid">Sign in</button>
+    <div style="display: flex; flex-direction: row-reverse;">
+      <button (click)="addCartaoUsuario()" type="submit" class="btn btn-primary"
+      [disabled]="cartaoForm.invalid">Salvar</button>
+    </div>
+
   </form>
 </div>
 

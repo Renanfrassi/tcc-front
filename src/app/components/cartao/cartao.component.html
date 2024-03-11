@@ -2,8 +2,8 @@
     <table class="table table-bordered table-sm" id="dataTable">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Descrição</th>
+                <th class="text-center">Id</th>
+                <th class="text-center">Status</th>
                 <th class="text-center">
                     <button (click)="abrirModalCartao()" class="btn btn-sm btn-success">
                         <em class="fa fa-plus"></em>
@@ -13,8 +13,16 @@
         </thead>
         <tbody>
             <tr *ngFor="let lista of listaCartao">
-                <td>{{ lista.id }}</td>
-                <td>{{ lista.nome }}</td>
+                <td class="text-center">{{ lista.id }}</td>
+                <td class="text-center"><i [class]="returnIconStatus(lista.statusEntrada)"></i></td>
+                <td class="text-center">
+                    <button (click)="abrirModalCartao(lista)" class="btn btn-sm btn-secondary">
+                        <i class="fa-fw fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger">
+                        <i class="fa-fw fas fa-trash"></i>
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>

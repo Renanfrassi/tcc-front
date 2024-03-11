@@ -14,6 +14,10 @@ export class UsuarioService {
         return this._httpClient.get<Array<Usuario>>("http://localhost:8080/usuario");
     } 
 
+    getUsuarioId(id : number) : Observable<Usuario> {
+        return this._httpClient.get<Usuario>("http://localhost:8080/usuario/find?id=" + id);
+    } 
+
     postUsuarios(usuario : Usuario) : Observable<Usuario>{
         return this._httpClient.post<Usuario>("http://localhost:8080/usuario", usuario);
     }
@@ -24,6 +28,10 @@ export class UsuarioService {
 
     deleteUsuarios(id : number) : Observable<Usuario>{
         return this._httpClient.delete<Usuario>("http://localhost:8080/usuario");
+    }
+
+    postPermissaoUsuario(slot : any){
+        return this._httpClient.post<any>("http://localhost:8080/usuario/slot", slot);
     }
 
 }

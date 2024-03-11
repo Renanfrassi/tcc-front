@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule, NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbPaginationConfig, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
 import {ButtonModule} from 'primeng/button';
@@ -20,8 +20,10 @@ import { SideBarComponent } from '../app/components/side-bar/side-bar.component'
 import { UsuarioService } from '../app/services/usuario.service';
 import { FechaduraService } from '../app/services/fechadura.service';
 import { CartaoService } from '../app/services/cartao.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalFechaduraComponent } from '../app/components/fechadura/modal-fechaduras/modal-fechadura.component';
+import { CartaoComponent } from '../app/components/cartao/cartao.component';
+import { ModalCartaoComponent } from './components/cartao/modal-cartao/modal-cartao.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ModalFechaduraComponent } from '../app/components/fechadura/modal-fecha
     SideBarComponent,
     ModalUsuarioComponent,
     ModalFechaduraComponent,
+    CartaoComponent,
+    ModalCartaoComponent,
     ],
   imports: [
     BrowserModule,
@@ -46,6 +50,8 @@ import { ModalFechaduraComponent } from '../app/components/fechadura/modal-fecha
     MessageModule,
     NoopAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
+    NgbTimepickerModule,
   ],
 
   exports : [
@@ -59,6 +65,7 @@ import { ModalFechaduraComponent } from '../app/components/fechadura/modal-fecha
   entryComponents: [
     ModalUsuarioComponent,
     ModalFechaduraComponent,
+    ModalCartaoComponent,
   ],
 
   providers: [

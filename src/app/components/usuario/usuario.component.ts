@@ -35,17 +35,38 @@ export class UsuarioComponent implements OnInit{
          )
      }
 
-     abrirModalUsuario(){
+     abrirModalUsuario(usuario : Usuario){
         const initialState: ModalOptions = {
             initialState: {
-                usuario : new Usuario()
-            }
+                usuario : usuario,
+                cartoes : usuario.cartoes
+            },
+            class : 'modal-lg',
           };
 
         this.bsModalRef = this._modalService.show(ModalUsuarioComponent, initialState);
         this.bsModalRef.content.evento.subscribe(
             result => {
                 this.getUsuarios();
+                this._modalService.hide();
+            }
+        )
+     }
+
+     abrirModalCriaUsuario(){
+        const initialState: ModalOptions = {
+            initialState: {
+                usuario : {},
+                cartoes : []
+            },
+            class : 'modal-lg',
+          };
+
+        this.bsModalRef = this._modalService.show(ModalUsuarioComponent, initialState);
+        this.bsModalRef.content.evento.subscribe(
+            result => {
+                this.getUsuarios();
+                this._modalService.hide();
             }
         )
      }

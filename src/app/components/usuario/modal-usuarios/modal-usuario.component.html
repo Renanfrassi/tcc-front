@@ -1,44 +1,50 @@
 <div class="modal-header">
   <h4 class="modal-title pull-left">Cadastro Usuário</h4>
 
-  <button type="button" class="close ml-2" aria-label="Close" (click)="bsModalRef.hide()">
+  <button type="button" class="close ml-2" aria-label="Close" (click)="closeModal()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 
 <div class="modal-body">
-  <form #formUsuarios="ngForm">
+  <form [formGroup]="usuarioForm">
     <div class="form-row">
       <div class="form-group col-6">
         <label>Nome</label>
-        <input type="text" [(ngModel)]="usuario.nome" class="form-control" name="nome" #nome="ngModel">
+        <input type="text" class="form-control" formControlName="nome">
       </div>
       <div class="form-group col-6">
         <label>Senha</label>
-        <input [(ngModel)]="usuario.senha" type="password" class="form-control" name="senha" #senha="ngModel">
+        <input type="password" class="form-control" formControlName="senha">
       </div>
       <div class="form-group col-6">
         <label>Telefone/Celular</label>
-        <input type="number" [(ngModel)]="usuario.telefone" class="form-control" name="telefone" #telefone="ngModel">
+        <input type="number" class="form-control" formControlName="telefone">
       </div>
       <div class="form-group col-6">
         <label>Matricula</label>
-        <input type="number" [(ngModel)]="usuario.matricula" class="form-control" name="telefone" #matricula="ngModel">
+        <input type="number" class="form-control" formControlName="telefone">
       </div>
       <div class="form-group col-6">
         <label>E-mail</label>
-        <input type="email" [(ngModel)]="usuario.email" class="form-control" name="email" #email="ngModel">
+        <input type="email" class="form-control" formControlName="email">
       </div>
       <div class="form-group col-4">
         <label for="inputState">Data de Nascimento</label>
-        <input type="date" [(ngModel)]="usuario.dataNasc" class="form-control" name="data-nasc" #dataNasc="ngModel">
+        <input type="date" class="form-control" formControlName="dataNasc">
       </div>
       <div class="form-group col-2">
         <label for="inputZip">Idade</label>
-        <input type="number" [(ngModel)]="usuario.idade" class="form-control" #idade="ngModel" name="idade">
+        <input type="number" class="form-control" formControlName="idade">
       </div>
     </div>
-    <button (click)="postUsuario()" class="btn btn-primary" [disabled]="formUsuarios.invalid">Sign in</button>
+    <div>
+      <app-cartao [idUsuario]="usuarioForm.get('id').value" [listaCartao]="cartoes"></app-cartao>
+    </div>
+    <div style="display: flex; flex-direction: row-reverse;">
+      <button *ngIf="!usuario" (click)="postUsuario()" class="btn btn-primary" [disabled]="usuarioForm.invalid">Salvar</button>
+      <button *ngIf="usuario" (click)="putUsuario()" class="btn btn-primary" [disabled]="usuarioForm.invalid">Alterar</button>
+    </div>
   </form>
 </div>
 

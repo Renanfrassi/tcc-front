@@ -12,10 +12,8 @@ import { ModalCartaoComponent } from "./modal-cartao/modal-cartao.component";
 })
 
 export class CartaoComponent implements OnInit{
-    @Input() usuario : Usuario;
-    
-    listaCartao : Array<Cartao> = new Array<Cartao>();
-    
+    @Input() listaCartao : Array<Cartao>;
+    @Input() idUsuario : number
     bsModalRef : BsModalRef;
     
     constructor(private _cartaoService : CartaoService,
@@ -25,19 +23,11 @@ export class CartaoComponent implements OnInit{
 
      }
 
-     getCartao(){
-        this._cartaoService.getCartaos().subscribe(
-            result => {
-                this.listaCartao = result
-            },
-            error => {console.error(error)}
-        )
-     }
-
      abrirModalCartao(){
         const initialState: ModalOptions = {
             initialState: {
-                cartao : new Cartao()
+                cartao : new Cartao(),
+                idUsuario : this.idUsuario
             },
             class : 'modal-md',
           };
@@ -49,6 +39,10 @@ export class CartaoComponent implements OnInit{
             },
             erro => console.error(erro)
         )
+     }
+
+     returnIconStatus(status : boolean){
+        return status ? "fa-fw fas fa-check" : "fa-fw fas fa-times";
      }
 
 }
