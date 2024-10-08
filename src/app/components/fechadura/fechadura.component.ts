@@ -42,7 +42,7 @@ export class FechaduraComponent implements OnInit{
                 this.loaderService.hide();
              },
              error => {
-                this.dialogModal.confirm('Ocorreu um erro!', error, null, 'Ok', 'erro')
+                this.toastService.showInfo("Nenhuma fechadura registrada!");
                 this.loaderService.hide();
                 console.error(error);
             }
