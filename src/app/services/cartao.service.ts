@@ -22,8 +22,8 @@ export class CartaoService {
         return this._httpClient.put<Cartao>("", cartao);
     }
 
-    deleteCartaos(id : string) : Observable<Cartao>{
-        return this._httpClient.delete<Cartao>("");
+    deleteCartaoUsuario(idCartao : string, idUsuario : number) : Observable<Cartao[]>{
+        return this._httpClient.delete<Cartao[]>("http://localhost:8090/cartao?idCartao=" + idCartao + "&idUsuario=" + idUsuario);
     }
 
 }

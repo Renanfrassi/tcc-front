@@ -1,24 +1,30 @@
-<div class="modal-header">
+<div class="modal-header" data-bs-backdrop="static">
   <h4 class="modal-title pull-left">Cadastro Fechadura</h4>
 
-  <button type="button" class="close ml-2" aria-label="Close" (click)="bsModalRef.hide()">
+  <button type="button" class="close ml-2" aria-label="Close" (click)="closeModal()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 
 <div class="modal-body">
-  <form #formFechaduras="ngForm">
+  <form [formGroup]="fechaduraForm">
     <div class="form-row">
-      <div class="form-group col-6">
+      <div class="form-group col-12">
         <label>Nome</label>
-        <input type="text" class="form-control" name="id">
+        <input type="text" formControlName="nome" class="form-control" name="id">
       </div>
-      <div class="form-group col-6">
+      <div class="form-group col-12">
         <label>Descrição</label>
-        <input [(ngModel)]="fechadura.descricao" type="password" class="form-control" name="descricao" #descricao="ngModel">
+        <textarea formControlName="descricao" class="form-control" rows="4" name="descricao"></textarea>
       </div>
     </div>
-    <button (click)="postFechadura()" class="btn btn-primary" [disabled]="formFechaduras.invalid">Sign in</button>
+    <div style="display: flex; flex-direction: row-reverse;">
+
+      <button *ngIf="state !== 'V'" (click)="confirm()" class="btn btn-primary"
+        [disabled]="fechaduraForm.invalid">Salvar</button>
+      <button *ngIf="state === 'V'" (click)="closeModal()" class="btn btn-danger">Fechar</button>
+    </div>
+
   </form>
 </div>
 

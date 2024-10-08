@@ -8,7 +8,6 @@ export class Usuario{
 	idade : number;
 	email : string;
 	dataNasc : Date;
-	senha : string;
 	matricula : number;
 	cartoes : Array<Cartao>;
 

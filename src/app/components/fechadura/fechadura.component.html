@@ -8,10 +8,10 @@
                 <table class="table table-bordered table-sm" id="dataTable">
                     <thead>
                         <tr>
-                            <th >Id</th>
-                            <th>Nome Fechadura</th>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">Descrição</th>
                             <th class="text-center">
-                                <button (click)="abrirModalFechadura()" class="btn btn-sm btn-success">
+                                <button (click)="abrirModalFechaduraInsercao()" class="btn btn-sm btn-success">
                                     <em class="fa fa-plus"></em>
                                 </button>
                             </th>
@@ -19,8 +19,19 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let lista of listaFechadura">
-                            <td></td>
-                            <td>{{ lista.descricao }}</td>
+                            <td class="text-center">{{ lista.nome }}</td>
+                            <td class="text-center">{{ lista.descricao }}</td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-info" (click)="abrirModalFechadura(lista)">
+                                    <i class="fa-fw fas fa-search"></i>
+                                </button>
+                                <button (click)="abrirModalFechaduraEdicao(lista)" class="btn btn-sm btn-secondary ml-2" [disabled]="state === 'V'">
+                                    <i class="fa-fw fas fa-edit"></i>
+                                </button>
+                                <button (click)="confirmDeleteFechaduraById(lista)" class="btn btn-sm btn-danger ml-2">
+                                    <i class="fa-fw fas fa-trash"></i>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

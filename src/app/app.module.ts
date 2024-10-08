@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule, NgbPaginationConfig, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbPaginationConfig, NgbTimepickerModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
 import {ButtonModule} from 'primeng/button';
@@ -24,6 +24,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalFechaduraComponent } from '../app/components/fechadura/modal-fechaduras/modal-fechadura.component';
 import { CartaoComponent } from '../app/components/cartao/cartao.component';
 import { ModalCartaoComponent } from './components/cartao/modal-cartao/modal-cartao.component';
+import { ConfirmDialogComponent } from './components/commons/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from './services/confirm-dialog.service';
+import { ToastService } from './services/toast.service';
+import { ToastComponent } from './components/commons/toast/toast.component';
+import { LoaderService } from './services/loader.service';
+import { LoaderComponent } from './components/commons/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +41,9 @@ import { ModalCartaoComponent } from './components/cartao/modal-cartao/modal-car
     ModalFechaduraComponent,
     CartaoComponent,
     ModalCartaoComponent,
+    ConfirmDialogComponent,
+    ToastComponent,
+    LoaderComponent
     ],
   imports: [
     BrowserModule,
@@ -52,6 +61,7 @@ import { ModalCartaoComponent } from './components/cartao/modal-cartao/modal-car
     FormsModule,
     ReactiveFormsModule,
     NgbTimepickerModule,
+    NgbToastModule  
   ],
 
   exports : [
@@ -66,12 +76,18 @@ import { ModalCartaoComponent } from './components/cartao/modal-cartao/modal-car
     ModalUsuarioComponent,
     ModalFechaduraComponent,
     ModalCartaoComponent,
+    ConfirmDialogComponent,
+    ToastComponent,
+    LoaderComponent
   ],
 
   providers: [
     UsuarioService,
     FechaduraService,
     CartaoService,
+    ConfirmDialogService,
+    ToastService,
+    LoaderService
   ],
   bootstrap: [AppComponent]
 })

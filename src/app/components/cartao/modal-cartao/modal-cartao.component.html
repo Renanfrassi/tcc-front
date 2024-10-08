@@ -1,7 +1,7 @@
 <div class="modal-header">
   <h4 class="modal-title pull-left">Cadastro Cartão</h4>
 
-  <button type="button" class="close ml-2" aria-label="Close" (click)="bsModalRef.hide()">
+  <button type="button" class="close ml-2" aria-label="Close" (click)="closeModal()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -23,7 +23,7 @@
       </div>
       <div class="form-group col-12">
         <label for="inputState">Salas</label>
-        <select class="form-control" id="idFechadura" formControlName="idFechadura">
+        <select class="form-control" id="idFechadura" formControlName="idFechadura" (change)="changeFechadura($event)">
           <option *ngFor="let fechadura of fechaduras" [value]="fechadura.id">{{ fechadura.descricao }}</option>
         </select>
       </div>
@@ -40,18 +40,23 @@
             <tr *ngFor="let dia of listaSemanal">
               <td>
                 <div class="form-check">
-                  <input class="form-check-input" (change)="addSlot($event)" type="checkbox" [value]="dia.diaSemana" id="invalidCheck2">
+                  <input class="form-check-input" (change)="addSlot($event)" type="checkbox" [value]="dia.diaSemana"
+                    id="invalidCheck2" [formControlName]="'dia' + dia.diaSemana">
                   <label class="form-check-label" for="invalidCheck2">
                     {{ dia.nomeDia }}
                   </label>
                 </div>
               </td>
-              <td (change)="changeHoraInicoSlot(dia.diaSemana, $event)" class="text-center"> <select  class="form-control" id="hourSelect">
-                  <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+              <td (change)="changeHoraInicoSlot(dia.diaSemana, $event)" class="text-center"> <select [disabled]="isDisabledColunaHora(dia.diaSemana) || state == 'V'" 
+                  class="form-control" id="hourSelect">
+                  <option *ngFor="let hora of horasInicio" [selected]="hora === dia.horaInicio" [value]="hora">{{ hora
+                    }}</option>
                 </select>
               </td>
-              <td (change)="changeHoraFimSlot(dia.diaSemana, $event)"  class="text-center"> <select class="form-control" id="hourSelect">
-                  <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+              <td (change)="changeHoraFimSlot(dia.diaSemana, $event)" class="text-center"> <select  [disabled]="isDisabledColunaHora(dia.diaSemana) || state == 'V'" class="form-control"
+                  id="hourSelect">
+                  <option *ngFor="let hora of horasFim" [selected]="hora === dia.horaFim"  [value]="hora">{{ hora }}
+                  </option>
                 </select>
               </td>
             </tr>
@@ -60,8 +65,9 @@
       </div>
     </div>
     <div style="display: flex; flex-direction: row-reverse;">
-      <button (click)="addCartaoUsuario()" type="submit" class="btn btn-primary"
-      [disabled]="cartaoForm.invalid">Salvar</button>
+      <button (click)="confirm()" class="btn btn-primary" *ngIf="state !== 'V'"
+        [disabled]="cartaoForm.invalid">Salvar</button>
+      <button *ngIf="state === 'V'" (click)="closeModal()" class="btn btn-danger">Fechar</button>
     </div>
 
   </form>

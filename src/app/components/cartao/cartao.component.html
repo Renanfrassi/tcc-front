@@ -5,7 +5,7 @@
                 <th class="text-center">Id</th>
                 <th class="text-center">Status</th>
                 <th class="text-center">
-                    <button (click)="abrirModalCartao()" class="btn btn-sm btn-success">
+                    <button (click)="abrirModalCriaCartao()" class="btn btn-sm btn-success" [disabled]="state === 'V'">
                         <em class="fa fa-plus"></em>
                     </button>
                 </th>
@@ -16,10 +16,13 @@
                 <td class="text-center">{{ lista.id }}</td>
                 <td class="text-center"><i [class]="returnIconStatus(lista.statusEntrada)"></i></td>
                 <td class="text-center">
-                    <button (click)="abrirModalCartao(lista)" class="btn btn-sm btn-secondary">
+                    <button class="btn btn-sm btn-info" (click)="abrirModalCartao(lista)">
+                        <i class="fa-fw fas fa-search"></i>
+                    </button>
+                    <button (click)="abrirModalCartaoEditar(lista)" class="btn btn-sm btn-secondary ml-2" [disabled]="state === 'V'">
                         <i class="fa-fw fas fa-edit"></i>
                     </button>
-                    <button class="btn btn-sm btn-danger">
+                    <button (click)="confirmDeleteCartaoUsuario(lista)" class="btn btn-sm btn-danger ml-2" [disabled]="state === 'V'">
                         <i class="fa-fw fas fa-trash"></i>
                     </button>
                 </td>

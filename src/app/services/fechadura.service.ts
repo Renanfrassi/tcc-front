@@ -11,19 +11,19 @@ export class FechaduraService {
     constructor(private _httpClient : HttpClient){ }
 
     getFechaduras() : Observable<Array<Fechadura>> {
-        return this._httpClient.get<Array<Fechadura>>("http://localhost:8080/fechadura");
+        return this._httpClient.get<Array<Fechadura>>("http://localhost:8090/fechadura");
     } 
 
     postFechaduras(fechadura : Fechadura) : Observable<Fechadura>{
-        return this._httpClient.post<Fechadura>("http://localhost:8080/fechadura", fechadura);
+        return this._httpClient.post<Fechadura>("http://localhost:8090/fechadura", fechadura);
     }
 
     putFechaduras(fechadura : Fechadura) : Observable<Fechadura>{
-        return this._httpClient.put<Fechadura>("http://localhost:8080/fechadura", fechadura);
+        return this._httpClient.put<Fechadura>("http://localhost:8090/fechadura", fechadura);
     }
 
     deleteFechaduras(id : string) : Observable<Fechadura>{
-        return this._httpClient.delete<Fechadura>("http://localhost:8080/fechadura");
+        return this._httpClient.delete<Fechadura>("http://localhost:8090/fechadura?idFechadura=" + id);
     }
 
 }

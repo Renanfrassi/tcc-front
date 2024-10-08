@@ -4,6 +4,10 @@ import { Usuario } from "../../../models/usuario";
 import { UsuarioService } from "../../../services/usuario.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Cartao } from "src/app/models/cartao";
+import * as moment from 'moment';
+import { ConfirmDialogService } from "src/app/services/confirm-dialog.service";
+import { ToastService } from "src/app/services/toast.service";
+import { LoaderService } from "src/app/services/loader.service";
 
 @Component({
     selector: 'app-usuario',
@@ -17,77 +21,111 @@ export class ModalUsuarioComponent implements OnInit {
 
     usuario: Usuario;
     usuarioForm: FormGroup;
-    cartoes : Array<Cartao>;
+    cartoes: Array<Cartao>;
+    state: string;
 
     constructor(private _usuarioService: UsuarioService,
         private formBuilder: FormBuilder,
-        private _mdService: BsModalService) { }
+        private _mdService: BsModalService,
+        private dialogModal: ConfirmDialogService,
+        private toastService: ToastService,
+        private loaderService: LoaderService) { }
 
     ngOnInit() {
         this.usuarioForm = this.formBuilder.group({
-            id : [''],
+            id: [''],
             nome: [''],
             telefone: [''],
             idade: [''],
             email: [''],
             dataNasc: [''],
-            senha: [''],
             matricula: [''],
         });
 
-        if (this.usuario) {
+        if (this.state === 'V') {
+            this.usuarioForm.disable();
+            this.getUsuarioId();
+        } else if (this.state === 'E') {
             this.getUsuarioId();
         }
     }
 
-    setUsuarioForm(){
+    setUsuarioForm() {
         this.usuarioForm.get('id').setValue(this.usuario.id);
         this.usuarioForm.get('nome').setValue(this.usuario.nome);
         this.usuarioForm.get('telefone').setValue(this.usuario.telefone);
         this.usuarioForm.get('idade').setValue(this.usuario.idade);
         this.usuarioForm.get('email').setValue(this.usuario.email);
-        this.usuarioForm.get('dataNasc').setValue(this.usuario.dataNasc);
-        this.usuarioForm.get('senha').setValue(this.usuario.senha);
+        this.usuarioForm.get('dataNasc').setValue(moment(this.usuario.dataNasc).format('YYYY-MM-DD'));
         this.usuarioForm.get('matricula').setValue(this.usuario.matricula);
     }
 
     postUsuario() {
+        this.loaderService.show();
         this._usuarioService.postUsuarios(this.usuarioForm.value).subscribe(
             result => {
-                this.usuarioForm.reset();
+                this.state = 'E';
                 this.evento.emit(true);
-                this._mdService.hide();
+                this.loaderService.hide();
+
             },
             error => {
-                this.evento.emit(true);
+                this.dialogModal.confirm('Error ao Incluir', error, null, 'sair', 'erro');
+                this.loaderService.hide();
+
+            }
+        )
+    }
+
+    confirm() {
+        this.dialogModal.confirm('Confirmação', 'Tem certeza que deseja continuar?', 'Confirmar', 'Cancelar', 'info').then(
+            result => {
+                if (result) {
+
+                    if (this.state === 'I')
+                        this.postUsuario();
+                    else
+                        this.putUsuario();
+
+                    return;
+                }
             }
         )
     }
 
     putUsuario() {
+        this.loaderService.show();
+
         this._usuarioService.postUsuarios(this.usuarioForm.value).subscribe(
             result => {
-                this.usuarioForm.reset();
                 this.evento.emit(true);
-                this._mdService.hide();
+
             },
             error => {
-                this.evento.emit(true);
+                this.dialogModal.confirm('Error ao Alterar', error, null, 'Sair', 'erro');
+                this.loaderService.hide();
+
             }
+
         )
     }
 
-    getUsuarioId(){
-
+    getUsuarioId() {
+        this.loaderService.show();
         this._usuarioService.getUsuarioId(this.usuario.id).subscribe(
             result => {
-               this.usuario = result;
-               this.setUsuarioForm();
+                this.usuario = result;
+                this.setUsuarioForm();
+                this.loaderService.hide();
             },
-            erro => console.error(erro)
-            
+            error => {
+                this.dialogModal.confirm('Error', error, null, 'sair', 'erro');
+                this.loaderService.hide();
+
+            }
+
         )
-     }
+    }
 
 
     closeModal() {
