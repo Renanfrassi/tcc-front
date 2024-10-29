@@ -49,9 +49,9 @@ export class ModalCartaoComponent implements OnInit {
         this.initListaSemanal();
         
         this.cartaoForm = this.formBuilder.group({
-            idCartao: [''],
-            dataInicio: [''],
-            dataFim: [''],
+            idCartao: [null],
+            dataInicio: [null],
+            dataFim: [null],
             idFechadura: [''],
             listaSlot: [],
             idUsuario: [''],

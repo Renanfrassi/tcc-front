@@ -33,13 +33,13 @@ export class ModalUsuarioComponent implements OnInit {
 
     ngOnInit() {
         this.usuarioForm = this.formBuilder.group({
-            id: [''],
-            nome: [''],
+            id: [null],
+            nome: [null],
             telefone: [''],
             idade: [''],
             email: [''],
             dataNasc: [''],
-            matricula: [''],
+            matricula: [null],
         });
 
         if (this.state === 'V') {
@@ -67,6 +67,15 @@ export class ModalUsuarioComponent implements OnInit {
                 this.state = 'E';
                 this.evento.emit(true);
                 this.loaderService.hide();
+                this.usuarioForm.setValue({
+                    id: result.id,
+                    nome: result.nome,
+                    telefone: result.telefone,
+                    idade: result.idade,
+                    email: result.email,
+                    dataNasc: moment(result.dataNasc).format('YYYY-MM-DD'),
+                    matricula: result.matricula,
+                })
 
             },
             error => {

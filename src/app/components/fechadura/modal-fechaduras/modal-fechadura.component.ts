@@ -32,8 +32,8 @@ export class ModalFechaduraComponent implements OnInit {
     ngOnInit() {
         this.fechaduraForm = this.formBuilder.group({
             id: [null],
-            descricao: [''],
-            nome: ['']
+            descricao: [null],
+            nome: [null]
         });
 
         if (this.state === 'V') {
@@ -55,8 +55,11 @@ export class ModalFechaduraComponent implements OnInit {
         this.dialogModal.confirm('Confirmação', 'Tem certeza que deseja continuar?', 'Confirmar', 'Cancelar').then(
             result => {
                 if (result) {
-                    this.postFechadura();
-                    return;
+                    if(this.state === 'I'){
+                        this.postFechadura();
+                        return;
+                    }
+                    this.putFechadura();
                 }
             }
         )
@@ -65,6 +68,21 @@ export class ModalFechaduraComponent implements OnInit {
     postFechadura() {
         this.loaderService.show();
         this._fechaduraService.postFechaduras(this.fechaduraForm.value).subscribe(
+            result => {
+                this.evento.emit(true);
+                this.closeModal();
+            },
+            error => {
+                this.loaderService.hide();
+                this.dialogModal.confirm('Error', error, null, 'sair', 'erro');
+            }
+        )
+    }
+
+    
+    putFechadura() {
+        this.loaderService.show();
+        this._fechaduraService.putFechaduras(this.fechaduraForm.value).subscribe(
             result => {
                 this.evento.emit(true);
                 this.closeModal();
