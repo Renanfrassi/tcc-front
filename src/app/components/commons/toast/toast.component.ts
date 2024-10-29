@@ -8,7 +8,6 @@ import { ToastService } from '../../../services/toast.service';
 })
 export class ToastComponent {
   constructor(public toastService: ToastService) {
-    console.log(toastService.toasts);
   }
 
   // Verifica se o conteúdo do toast é um template
