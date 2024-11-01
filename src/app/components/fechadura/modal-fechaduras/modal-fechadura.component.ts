@@ -74,7 +74,7 @@ export class ModalFechaduraComponent implements OnInit {
             },
             error => {
                 this.loaderService.hide();
-                this.dialogModal.confirm('Error', error, null, 'sair', 'erro');
+                this.dialogModal.confirm('Error', error.error, null, 'sair', 'erro');
             }
         )
     }
@@ -89,7 +89,7 @@ export class ModalFechaduraComponent implements OnInit {
             },
             error => {
                 this.loaderService.hide();
-                this.dialogModal.confirm('Error', error, null, 'sair', 'erro');
+                this.dialogModal.confirm('Error', error.error, null, 'sair', 'erro');
             }
         )
     }

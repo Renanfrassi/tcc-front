@@ -16,7 +16,8 @@ export class ConfirmDialogService {
     message: string = 'Tem certeza que deseja continuar?',
     confirmText: string = 'Confirmar',
     cancelText: string = 'Cancelar',
-    operation: string = 'info'
+    operation: string = 'info',
+    subMessage?
   ): Promise<boolean> {
     this.bsModalRef = this.modalService.show(ConfirmDialogComponent, {
       initialState: {
@@ -24,7 +25,8 @@ export class ConfirmDialogService {
         message,
         confirmText,
         cancelText,
-        operation
+        operation,
+        subMessage
       },
       backdrop : 'static',
       keyboard: false,

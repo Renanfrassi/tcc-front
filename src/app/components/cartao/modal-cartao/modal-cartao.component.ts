@@ -122,7 +122,7 @@ export class ModalCartaoComponent implements OnInit {
 
             },
             error => {
-                this.dialogModal.confirm('Error', error, null, 'Sair', 'erro');
+                this.dialogModal.confirm('Error', error.error, null, 'Sair', 'erro');
                 this.loaderService.hide();
 
             }
@@ -143,7 +143,7 @@ export class ModalCartaoComponent implements OnInit {
 
             },
             error => {
-                this.dialogModal.confirm('Error', error, null, 'Sair', 'erro');
+                this.dialogModal.confirm('Error', error.error, null, 'Sair', 'erro');
                 this.loaderService.hide();
             }
 
@@ -164,7 +164,7 @@ export class ModalCartaoComponent implements OnInit {
                     this.loaderService.hide();
                 },
                 error => {
-                    this.dialogModal.confirm('Error', error, null, 'Sair', 'erro');
+                    this.dialogModal.confirm('Error', error.error, null, 'Sair', 'erro');
                     this.loaderService.hide();
                     error(false);
                 }
@@ -258,9 +258,9 @@ export class ModalCartaoComponent implements OnInit {
                 this.loaderService.hide();
             },
             error => {
-                this.dialogModal.confirm("Error", error, null, "sair", 'erro');
+                this.dialogModal.confirm("Error", error.error, null, "sair", 'erro');
                 this.loaderService.hide();
-                
+                this._mdService.hide();
             }
         );
 

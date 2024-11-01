@@ -40,7 +40,7 @@ export class UsuarioComponent implements OnInit{
         
              },
              erro => {
-                this.dialogModal.confirm("Erro", erro, null, "sair", erro);
+                this.toastService.showInfo("Nenhuma usuario encontrada!");
                 this.loaderService.hide();
             }
              
@@ -111,7 +111,7 @@ export class UsuarioComponent implements OnInit{
      }
 
      confirmDeleteCartaoUsuario(usuario){
-        this.dialogModal.confirm('Exclusão', 'Tem certeza que deseja deletar esse item?', 'Excluir', 'Cancelar').then(
+        this.dialogModal.confirm('Exclusão', 'Tem certeza que deseja deletar esse item?', 'Excluir', 'Cancelar', 'info', 'Todos os cartões e permissões serão deletados após isso!!').then(
             result => {
                 if(result){
                     this.deleteCartaoUsuario(usuario);
@@ -131,7 +131,7 @@ export class UsuarioComponent implements OnInit{
 
             },
             error => {
-                this.dialogModal.confirm('Exclusão', error, null, 'Sair', 'error');
+                this.dialogModal.confirm('Exclusão', error.error, null, 'Sair', 'error');
                 this.loaderService.hide();   
             }
         );

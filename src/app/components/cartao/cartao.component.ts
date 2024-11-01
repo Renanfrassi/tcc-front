@@ -108,7 +108,7 @@ export class CartaoComponent implements OnInit {
 
             },
             error => {
-                this.dialogModal.confirm('Error', error, null, 'Sair', 'erro');
+                this.dialogModal.confirm('Error', error.error, null, 'Sair', 'erro');
                 this.loaderService.hide();
             }
 
@@ -116,7 +116,7 @@ export class CartaoComponent implements OnInit {
     }
 
     confirmDeleteCartaoUsuario(cartao) {
-        this.dialogModal.confirm('Exclusão', 'Tem certeza que deseja deletar esse item?', 'Excluir', 'Cancelar').then(
+        this.dialogModal.confirm('Exclusão', 'Tem certeza que deseja deletar esse item?', 'Excluir', 'Cancelar', 'info', 'O cartão e todas permissões serão deletados após isso!!').then(
             result => {
                 if (result) {
                     this.deleteCartaoUsuario(cartao);

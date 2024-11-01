@@ -42,9 +42,8 @@ export class FechaduraComponent implements OnInit{
                 this.loaderService.hide();
              },
              error => {
-                this.toastService.showInfo("Nenhuma fechadura registrada!");
+                this.toastService.showInfo("Nenhuma fechadura encontrada!");
                 this.loaderService.hide();
-                console.error(error);
             }
              
          )
@@ -127,7 +126,7 @@ export class FechaduraComponent implements OnInit{
                 this.getFechaduras();
             },
             error => {
-                this.dialogModal.confirm('Ocorreu um erro!', error, null, 'Ok', 'erro')
+                this.dialogModal.confirm('Ocorreu um erro!', error.error, null, 'Ok', 'erro')
                 this.loaderService.hide();
             }
         );

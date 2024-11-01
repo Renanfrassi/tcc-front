@@ -12,8 +12,11 @@ export class ConfirmDialogComponent {
     @Input() confirmText: string = null;
     @Input() cancelText: string = null;
     @Input() operation: string = 'info';
+    @Input() subMessage: string = null;
 
-    constructor(public bsModalRef: BsModalRef) { }
+    constructor(public bsModalRef: BsModalRef) { 
+        console.log(this.subMessage);
+    }
 
     confirm() {
         this.bsModalRef.hide();
