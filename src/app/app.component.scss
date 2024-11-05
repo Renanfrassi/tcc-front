@@ -1,0 +1,8 @@
+.home-background {
+    background-image: url('/assets/backgound.png'); /* Caminho da imagem no diretório 'assets' */
+    background-size: cover; /* Faz a imagem cobrir todo o contêiner */
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Ajusta a altura para cobrir a tela inteira */
+    width: 100%;
+}
