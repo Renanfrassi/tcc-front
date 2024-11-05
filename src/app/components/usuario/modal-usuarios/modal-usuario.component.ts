@@ -2,7 +2,7 @@ import { Component, EventEmitter, Inject, OnInit } from "@angular/core";
 import { BsModalRef, BsModalService, ModalOptions } from "ngx-bootstrap/modal";
 import { Usuario } from "../../../models/usuario";
 import { UsuarioService } from "../../../services/usuario.service";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Cartao } from "src/app/models/cartao";
 import * as moment from 'moment';
 import { ConfirmDialogService } from "src/app/services/confirm-dialog.service";
@@ -34,12 +34,10 @@ export class ModalUsuarioComponent implements OnInit {
     ngOnInit() {
         this.usuarioForm = this.formBuilder.group({
             id: [null],
-            nome: [null],
-            telefone: [''],
-            idade: [''],
-            email: [''],
-            dataNasc: [''],
-            matricula: [null],
+            nome: [null, Validators.required],
+            email: ['', Validators.required],
+            dataNasc: ['', Validators.required],
+            matricula: [null, Validators.required],
         });
 
         if (this.state === 'V') {
@@ -53,8 +51,6 @@ export class ModalUsuarioComponent implements OnInit {
     setUsuarioForm() {
         this.usuarioForm.get('id').setValue(this.usuario.id);
         this.usuarioForm.get('nome').setValue(this.usuario.nome);
-        this.usuarioForm.get('telefone').setValue(this.usuario.telefone);
-        this.usuarioForm.get('idade').setValue(this.usuario.idade);
         this.usuarioForm.get('email').setValue(this.usuario.email);
         this.usuarioForm.get('dataNasc').setValue(moment(this.usuario.dataNasc).format('YYYY-MM-DD'));
         this.usuarioForm.get('matricula').setValue(this.usuario.matricula);
@@ -70,8 +66,6 @@ export class ModalUsuarioComponent implements OnInit {
                 this.usuarioForm.setValue({
                     id: result.id,
                     nome: result.nome,
-                    telefone: result.telefone,
-                    idade: result.idade,
                     email: result.email,
                     dataNasc: moment(result.dataNasc).format('YYYY-MM-DD'),
                     matricula: result.matricula,

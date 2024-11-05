@@ -2,7 +2,7 @@ import { Component, EventEmitter, Inject, OnInit } from "@angular/core";
 import { BsModalRef, BsModalService, ModalOptions } from "ngx-bootstrap/modal";
 import { Fechadura } from "../../../models/fechadura";
 import { FechaduraService } from "../../../services/fechadura.service";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ConfirmDialogService } from "src/app/services/confirm-dialog.service";
 import { ToastService } from "src/app/services/toast.service";
 import { LoaderService } from "src/app/services/loader.service";
@@ -32,8 +32,8 @@ export class ModalFechaduraComponent implements OnInit {
     ngOnInit() {
         this.fechaduraForm = this.formBuilder.group({
             id: [null],
-            descricao: [null],
-            nome: [null]
+            descricao: [null, Validators.required],
+            nome: [null, Validators.required]
         });
 
         if (this.state === 'V') {

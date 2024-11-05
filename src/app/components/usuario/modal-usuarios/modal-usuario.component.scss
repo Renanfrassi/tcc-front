@@ -2,3 +2,28 @@
     margin: 0 auto;
     max-width: 1200px;
 }
+
+textarea.ng-valid.ng-touched {
+    border: 2px solid green;
+}
+
+/* Campo inválido */
+textarea.ng-invalid.ng-touched {
+    border: 2px solid red;
+}
+
+input.ng-valid.ng-touched {
+    border: 2px solid green;
+}
+
+/* Campo inválido */
+input.ng-invalid.ng-touched {
+    border: 2px solid red;
+}
+
+/* Mensagem de erro */
+.error-message {
+    color: red;
+    font-size: 0.9em;
+}
+

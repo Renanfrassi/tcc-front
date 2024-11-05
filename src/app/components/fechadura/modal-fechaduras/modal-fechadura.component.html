@@ -10,12 +10,18 @@
   <form [formGroup]="fechaduraForm">
     <div class="form-row">
       <div class="form-group col-12">
-        <label>Nome</label>
-        <input type="text" formControlName="nome" class="form-control" name="id">
+        <label>Nome <label class="error-message">*</label></label>
+        <input required type="text" formControlName="nome" class="form-control" name="id">
+
       </div>
       <div class="form-group col-12">
-        <label>Descrição</label>
-        <textarea formControlName="descricao" class="form-control" rows="4" name="descricao"></textarea>
+        <label>Descrição <label class="error-message">*</label></label>
+        <textarea required formControlName="descricao" class="form-control" rows="4" name="descricao"></textarea>
+      </div>
+      <div>
+        <small class="error-message">
+          * Campos obrigatórios.
+        </small>
       </div>
     </div>
     <div style="display: flex; flex-direction: row-reverse;">
