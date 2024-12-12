@@ -89,7 +89,6 @@ export class CartaoComponent implements OnInit {
         this.bsModalRef = this._modalService.show(ModalCartaoComponent, initialState);
         this.bsModalRef.content.evento.subscribe(
             result => {
-                this.listaCartao.push(result);
                 this.toastService.showSuccess("Cartão e suas Permissões alteradas com sucesso!");
                 this.evento.emit();
 
@@ -130,9 +129,6 @@ export class CartaoComponent implements OnInit {
         return status ? "fa-fw fas fa-check" : "fa-fw fas fa-times";
     }
 
-    closeModal() {
-        this._modalService.hide();
-    }
 
 
 }

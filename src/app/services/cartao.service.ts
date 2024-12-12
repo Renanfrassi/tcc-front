@@ -17,4 +17,8 @@ export class CartaoService {
         return this._httpClient.delete<Cartao[]>(this.apiURL + this.endpoint + "?idCartao=" + idCartao + "&idUsuario=" + idUsuario);
     }
 
+
+    gerarArquivoCartao() : Observable<any>{
+        return this._httpClient.get<Cartao[]>(this.apiURL + this.endpoint + "/gerar-arquivo");
+    }
 }

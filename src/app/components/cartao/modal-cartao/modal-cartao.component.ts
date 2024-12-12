@@ -119,6 +119,7 @@ export class ModalCartaoComponent implements OnInit {
                 this.evento.emit(result);
                 this.state = "E";
                 this.loaderService.hide();
+                this.cartaoForm.get('idCartao').disable();
 
             },
             error => {
@@ -229,7 +230,7 @@ export class ModalCartaoComponent implements OnInit {
         this.loaderService.show();
 
         let filter = {
-            idCartao: this.idCartao,
+            idCartao: this.idCartao ? this.idCartao : "",
             idFechadura: this.idFechadura,
             idUsuario: this.idUsuario
         }
@@ -260,7 +261,6 @@ export class ModalCartaoComponent implements OnInit {
             error => {
                 this.dialogModal.confirm("Error", error.error, null, "sair", 'erro');
                 this.loaderService.hide();
-                this._mdService.hide();
             }
         );
 

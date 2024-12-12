@@ -30,7 +30,8 @@ import { ToastService } from './services/toast.service';
 import { ToastComponent } from './components/commons/toast/toast.component';
 import { LoaderService } from './services/loader.service';
 import { LoaderComponent } from './components/commons/loader/loader.component';
-
+import {FloatingButtonComponent } from  './components/commons/floating-button/floating-button.component';
+import { ArquivoService } from './services/arquivo.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { LoaderComponent } from './components/commons/loader/loader.component';
     ModalCartaoComponent,
     ConfirmDialogComponent,
     ToastComponent,
-    LoaderComponent
+    LoaderComponent,
+    FloatingButtonComponent
     ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ import { LoaderComponent } from './components/commons/loader/loader.component';
     ModalCartaoComponent,
     ConfirmDialogComponent,
     ToastComponent,
-    LoaderComponent
+    LoaderComponent,
+    FloatingButtonComponent
   ],
 
   providers: [
@@ -87,7 +90,8 @@ import { LoaderComponent } from './components/commons/loader/loader.component';
     CartaoService,
     ConfirmDialogService,
     ToastService,
-    LoaderService
+    LoaderService,
+    ArquivoService,
   ],
   bootstrap: [AppComponent]
 })
